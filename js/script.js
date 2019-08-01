@@ -32,7 +32,8 @@ function playGame(playerInput) {
             printMessage('Remis!');
         } else if (computerMove === PAPER && playerMove === PAPER) {
             printMessage('Remis!');
-        } else if ((computerMove === STONE ||
+        } else if ((
+                computerMove === STONE ||
                 computerMove === SCISSORS ||
                 computerMove === PAPER) &&
             playerMove === 'nieznany ruch') {
