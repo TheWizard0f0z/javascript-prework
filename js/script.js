@@ -1,15 +1,19 @@
+const STONE = 'kamień';
+const PAPER = 'papier';
+const SCISSORS = 'nożyce';
+
 let randomNumber = Math.floor(Math.random() * 3 + 1);
 
 console.log('Wylosowana liczba to: ' + randomNumber);
 
 let computerMove = 'nieznany ruch';
 
-if(randomNumber == 1){
-  computerMove = 'kamień';
-} else if(randomNumber == 2){
-    computerMove = 'papier';
-} else if(randomNumber == 3){
-    computerMove = 'nożyce';
+if (randomNumber == 1) {
+    computerMove = STONE;
+} else if (randomNumber == 2) {
+    computerMove = PAPER;
+} else if (randomNumber == 3) {
+    computerMove = SCISSORS;
 }
 
 printMessage('Mój ruch to: ' + computerMove);
@@ -20,30 +24,34 @@ console.log('Gracz wpisał: ' + playerInput);
 
 let playerMove = 'nieznany ruch';
 
-if(playerInput == '1'){
-  playerMove = 'kamień';
-} else if(playerInput == '2'){
-    playerMove = 'papier';
-} else if(playerInput == '3'){
-    playerMove = 'nożyce';
+if (playerInput === '1') {
+    playerMove = STONE;
+} else if (playerInput === '2') {
+    playerMove = PAPER;
+} else if (playerInput === '3') {
+    playerMove = SCISSORS;
 }
 
 printMessage('Twój ruch to: ' + playerMove);
 
-if( computerMove == 'kamień' && playerMove == 'papier'){
+if (computerMove === STONE && playerMove === PAPER) {
     printMessage('Ty wygrywasz!');
-} else if( computerMove == 'nożyce' && playerMove == 'kamień'){
+} else if (computerMove === SCISSORS && playerMove === STONE) {
     printMessage('Ty wygrywasz!');
-} else if( computerMove == 'papier' && playerMove == 'nożyce'){
+} else if (computerMove === PAPER && playerMove === SCISSORS) {
     printMessage('Ty wygrywasz!');
-} else if( computerMove == 'kamień' && playerMove == 'kamień'){
+} else if (computerMove === STONE && playerMove === STONE) {
     printMessage('Remis!');
-} else if( computerMove == 'nożyce' && playerMove == 'nożyce'){
+} else if (computerMove === SCISSORS && playerMove === SCISSORS) {
     printMessage('Remis!');
-} else if( computerMove == 'papier' && playerMove == 'papier'){
+} else if (computerMove === PAPER && playerMove === PAPER) {
     printMessage('Remis!');
-} else if( computerMove == 'kamień' || 'nożyce' || 'papier' && playerMove == 'nieznany ruch'){
+} else if (
+    computerMove === STONE ||
+    computerMove === SCISSORS ||
+    computerMove === PAPER &&
+    playerMove === 'nieznany ruch') {
     printMessage('Oszukujesz!');
-} else{
+} else {
     printMessage('Ty przegrywasz!');
 }
