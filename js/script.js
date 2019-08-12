@@ -2,81 +2,87 @@ const STONE = "kamień";
 const PAPER = "papier";
 const SCISSORS = "nożyce";
 
-let playerScore = 0;
-let computerScore = 0;
+const game = function() {
+  const playGame = function(playerInput) {
+    clearMessages();
 
-function playGame(playerInput) {
-  clearMessages();
+    const getMoveName = function(randomNumber) {
+      if (randomNumber === 1) {
+        return STONE;
+      } else if (randomNumber === 2) {
+        return PAPER;
+      } else if (randomNumber === 3) {
+        return SCISSORS;
+      } else {
+        printMessage("Nie znam ruchu o id " + randomNumber + ".");
+        return "nieznany ruch";
+      }
+    };
 
-  function getMoveName(randomNumber) {
-    if (randomNumber === 1) {
-      return STONE;
-    } else if (randomNumber === 2) {
-      return PAPER;
-    } else if (randomNumber === 3) {
-      return SCISSORS;
-    } else {
-      printMessage("Nie znam ruchu o id " + randomNumber + ".");
-      return "nieznany ruch";
-    }
-  }
+    let playerScore = 0;
+    let computerScore = 0;
+    let contestantsDraw = 0;
 
-  function displayResult(computerMove, playerMove) {
-    if (computerMove === STONE && playerMove === PAPER) {
-      printMessage("Ty wygrywasz!");
-      playerScore++;
-    } else if (computerMove === SCISSORS && playerMove === STONE) {
-      printMessage("Ty wygrywasz!");
-      playerScore++;
-    } else if (computerMove === PAPER && playerMove === SCISSORS) {
-      printMessage("Ty wygrywasz!");
-      playerScore++;
-    } else if (computerMove === STONE && playerMove === STONE) {
-      printMessage("Remis!");
-    } else if (computerMove === SCISSORS && playerMove === SCISSORS) {
-      printMessage("Remis!");
-    } else if (computerMove === PAPER && playerMove === PAPER) {
-      printMessage("Remis!");
-    } else if (
-      (computerMove === STONE ||
-        computerMove === SCISSORS ||
-        computerMove === PAPER) &&
-      playerMove === "nieznany ruch"
-    ) {
-      printMessage("Oszukujesz!");
-    } else {
-      printMessage("Ty przegrywasz!");
-      computerScore++;
-    }
-    printMessage("Punkty gracza: " + playerScore);
-    printMessage("Punkty komputera: " + computerScore);
-  }
+    const displayResult = function(computerMove, playerMove) {
+      if (computerMove === STONE && playerMove === PAPER) {
+        printMessage("Ty wygrywasz!");
+        playerScore++;
+      } else if (computerMove === SCISSORS && playerMove === STONE) {
+        printMessage("Ty wygrywasz!");
+        playerScore++;
+      } else if (computerMove === PAPER && playerMove === SCISSORS) {
+        printMessage("Ty wygrywasz!");
+        playerScore++;
+      } else if (computerMove === playerMove) {
+        printMessage("Remis!");
+        contestantsDraw++;
+      } else if (
+        (computerMove === STONE ||
+          computerMove === SCISSORS ||
+          computerMove === PAPER) &&
+        playerMove === "nieznany ruch"
+      ) {
+        printMessage("Oszukujesz!");
+      } else {
+        printMessage("Ty przegrywasz!");
+        computerScore++;
+      }
 
-  let randomNumber = Math.floor(Math.random() * 3 + 1);
+      printMessage("Punkty gracza: " + playerScore);
+      printMessage("Punkty komputera: " + computerScore);
+      printMessage("Remisy: " + contestantsDraw);
+    };
 
-  console.log("Wylosowana liczba to: " + randomNumber);
+    const randomNumber = Math.floor(Math.random() * 3 + 1);
 
-  let computerMove = getMoveName(randomNumber);
+    console.log("Wylosowana liczba to: " + randomNumber);
 
-  printMessage("Mój ruch to: " + computerMove);
+    const computerMove = getMoveName(randomNumber);
 
-  console.log("Gracz wpisał: " + playerInput);
+    printMessage("Mój ruch to: " + computerMove);
 
-  let playerMove = getMoveName(playerInput);
+    console.log("Gracz wpisał: " + playerInput);
 
-  printMessage("Twój ruch to: " + playerMove);
+    const playerMove = getMoveName(playerInput);
 
-  displayResult(computerMove, playerMove);
-}
+    printMessage("Twój ruch to: " + playerMove);
 
-document.getElementById("play-stone").addEventListener("click", function() {
-  playGame(1);
-});
+    displayResult(computerMove, playerMove);
+  };
 
-document.getElementById("play-paper").addEventListener("click", function() {
-  playGame(2);
-});
+  document.getElementById("play-stone").addEventListener("click", function() {
+    playGame(1);
+  });
 
-document.getElementById("play-scissors").addEventListener("click", function() {
-  playGame(3);
-});
+  document.getElementById("play-paper").addEventListener("click", function() {
+    playGame(2);
+  });
+
+  document
+    .getElementById("play-scissors")
+    .addEventListener("click", function() {
+      playGame(3);
+    });
+};
+
+game();
