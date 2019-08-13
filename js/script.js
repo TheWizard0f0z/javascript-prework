@@ -2,6 +2,10 @@ const STONE = "kamień";
 const PAPER = "papier";
 const SCISSORS = "nożyce";
 
+let playerScore = 0;
+let computerScore = 0;
+let contestantsDraw = 0;
+
 const game = function() {
   const playGame = function(playerInput) {
     clearMessages();
@@ -19,10 +23,6 @@ const game = function() {
       }
     };
 
-    let playerScore = 0;
-    let computerScore = 0;
-    let contestantsDraw = 0;
-
     const displayResult = function(computerMove, playerMove) {
       if (computerMove === STONE && playerMove === PAPER) {
         printMessage("Ty wygrywasz!");
@@ -36,12 +36,7 @@ const game = function() {
       } else if (computerMove === playerMove) {
         printMessage("Remis!");
         contestantsDraw++;
-      } else if (
-        (computerMove === STONE ||
-          computerMove === SCISSORS ||
-          computerMove === PAPER) &&
-        playerMove === "nieznany ruch"
-      ) {
+      } else if (playerMove === "nieznany ruch") {
         printMessage("Oszukujesz!");
       } else {
         printMessage("Ty przegrywasz!");
@@ -84,5 +79,4 @@ const game = function() {
       playGame(3);
     });
 };
-
 game();
